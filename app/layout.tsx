@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ibmPlexSans } from "./fonts/font";
 import "./globals.css";
+import BottomNavbar from "@/components/bottom-navbar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,7 +15,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl">
-      <body className={`${ibmPlexSans.variable} antialiased`}>{children}</body>
+      <body className={`${ibmPlexSans.variable} antialiased`}>
+        <div className="max-w-4xl md:mx-auto h-full p-4 bg-background min-h-dvh flex flex-col">
+          <main>{children}</main>
+          <div className="mt-auto">
+            <BottomNavbar />
+          </div>
+        </div>
+      </body>
     </html>
   );
 }
