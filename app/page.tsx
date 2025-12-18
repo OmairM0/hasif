@@ -1,4 +1,3 @@
-import BottomNavbar from "@/components/bottom-navbar";
 import Header from "@/components/header";
 import Logo from "@/components/logo";
 import MainCard from "@/components/main-card";

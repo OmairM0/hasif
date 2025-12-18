@@ -47,6 +47,16 @@ body {
   /* font-family: var(--font-ibm-plex-sans), sans-serif; */
 }
 
+/* hide scrollbar but keep scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 /* 
 import 'package:flutter/material.dart';
 

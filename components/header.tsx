@@ -1,5 +1,3 @@
-import { Settings } from "lucide-react";
-import Logo from "./logo";
 import { ReactNode } from "react";
 
 interface IProps {

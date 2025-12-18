@@ -18,7 +18,7 @@ export default function RootLayout({
       <body className={`${ibmPlexSans.variable} antialiased`}>
         <div className="max-w-4xl md:mx-auto h-full p-4 bg-background min-h-dvh flex flex-col">
           <main>{children}</main>
-          <div className="mt-auto">
+          <div className="mt-auto p-2">
             <BottomNavbar />
           </div>
         </div>
