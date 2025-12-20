@@ -3,7 +3,10 @@ import WordCard from "@/components/word-card";
 import { IWord } from "@/interfaces";
 
 export default async function Page() {
-  const data = await fetch("http://localhost:3000/api/words");
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const data = await fetch(`${apiUrl}/api/words`, {
+    cache: "no-store",
+  });
   const words: IWord[] = await data.json();
 
   return (

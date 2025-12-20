@@ -1,11 +1,14 @@
+"use client";
+
 import { IWord } from "@/interfaces";
-import { ChevronLeft, Star } from "lucide-react";
+import { ChevronLeft, Star, StarOff } from "lucide-react";
 import {
   BottomSheet,
   BottomSheetContent,
   BottomSheetTrigger,
 } from "./ui/bottom-sheet";
 import Button from "./ui/button";
+import { useFavorites } from "@/contexts/FavoritesContext";
 
 interface IProps {
   word: IWord;
@@ -13,6 +16,8 @@ interface IProps {
 
 export default function WordCard({ word }: IProps) {
   const { word: name, meaning } = word;
+  const { addWord, removeWord, isFavorite } = useFavorites();
+
   return (
     <BottomSheet>
       <BottomSheetTrigger>
@@ -47,13 +52,24 @@ export default function WordCard({ word }: IProps) {
           </div>
 
           <div className="mx-auto mt-8 w-fit">
-            <Button
-              variant="secondary"
-              icon={<Star size={20} />}
-              className="mx-auto rounded-3xl"
-            >
-              إضافة للمفضلة
-            </Button>
+            {isFavorite(word.word) ? (
+              <Button
+                variant="secondary"
+                icon={<StarOff size={20} />}
+                className="mx-auto rounded-3xl"
+                onClick={() => removeWord(word.word)}
+              >
+                حذف من المفضلة
+              </Button>
+            ) : (
+              <Button
+                icon={<Star size={20} />}
+                className="mx-auto rounded-3xl"
+                onClick={() => addWord(word)}
+              >
+                إضافة للمفضلة
+              </Button>
+            )}
           </div>
         </div>
       </BottomSheetContent>

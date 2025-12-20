@@ -1,7 +1,13 @@
 "use client";
 import { createPortal } from "react-dom";
 import BottomSheetContext, { useBottomSheet } from "./context";
-import { cloneElement, ReactElement, ReactNode, useState } from "react";
+import {
+  cloneElement,
+  ReactElement,
+  ReactNode,
+  useLayoutEffect,
+  useState,
+} from "react";
 import { cn } from "@/lib/utils";
 
 interface IProps {
@@ -57,6 +63,15 @@ function BottomSheetOverlay({ children }: IProps) {
 
 function BottomSheetContent({ children }: IProps) {
   const { open } = useBottomSheet();
+
+  const [mounted, setMounted] = useState(false);
+
+  useLayoutEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   return createPortal(
     <BottomSheetOverlay>
