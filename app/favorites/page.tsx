@@ -1,5 +1,10 @@
 import FavoritesList from "@/components/favorites-list";
 import Header from "@/components/header";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "المفضلة",
+};
 
 export default function Page() {
   return (

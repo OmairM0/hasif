@@ -1,6 +1,11 @@
 import Header from "@/components/header";
 import WordCard from "@/components/word-card";
 import { IWord } from "@/interfaces";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "الكلمات",
+};
 
 export default async function Page() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
