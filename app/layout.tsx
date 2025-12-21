@@ -3,6 +3,7 @@ import { ibmPlexSans } from "./fonts/font";
 import "./globals.css";
 import BottomNavbar from "@/components/bottom-navbar";
 import { FavoritesClientProvider } from "@/providers/FavoritesClientProvider";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,6 +26,7 @@ export default function RootLayout({
             <BottomNavbar />
           </div>
         </div>
+        <Analytics />
       </body>
     </html>
   );
