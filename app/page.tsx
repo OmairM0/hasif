@@ -6,7 +6,7 @@ import { Settings } from "lucide-react";
 export default function Home() {
   return (
     <div>
-      <Header title={<Logo />} icon={<Settings />} />
+      <Header title={<Logo />} icon={<Settings aria-hidden="true" />} />
       <TodayWord />
     </div>
   );

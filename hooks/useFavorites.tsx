@@ -4,15 +4,29 @@ import { useEffect, useState } from "react";
 const STORAGE_KEY = "favoritesWords";
 
 export function useFavoritesState() {
-  const [favorites, setFavorites] = useState<IWord[]>(() => {
-    if (typeof window === "undefined") return [];
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]");
-  });
+  const [favorites, setFavorites] = useState<IWord[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // load from localStorage (once)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      setFavorites(stored ? JSON.parse(stored) : []);
+    } catch {
+      setFavorites([]);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   // persist to localStorage
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
-  }, [favorites]);
+    if (!isLoading) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
+    }
+  }, [favorites, isLoading]);
 
   useEffect(() => {
     const onStorageChange = (event: StorageEvent) => {
@@ -39,7 +53,7 @@ export function useFavoritesState() {
     return favorites.some((word) => word.word === wordName);
   };
 
-  return { favorites, addWord, removeWord, isFavorite };
+  return { favorites, addWord, removeWord, isFavorite, isLoading };
 }
 
 /**

@@ -48,8 +48,9 @@ export function useTodayWord() {
       }
       setIsLoading(false);
     };
-    
+
     loadTodayWord();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const refreshWord = async () => {

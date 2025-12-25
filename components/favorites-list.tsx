@@ -3,9 +3,19 @@
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { Star } from "lucide-react";
 import WordCard from "./word-card";
+import Spinner from "./ui/spinner";
 
 export default function FavoritesList() {
-  const { favorites } = useFavorites();
+  const { favorites, isLoading } = useFavorites();
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center mt-8">
+        <Spinner />
+      </div>
+    );
+  }
+
   if (favorites.length === 0) {
     return (
       <div className="mt-4 flex flex-1 flex-col items-center justify-center gap-2">

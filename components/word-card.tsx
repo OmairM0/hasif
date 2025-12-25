@@ -21,16 +21,13 @@ export default function WordCard({ word }: IProps) {
   return (
     <BottomSheet>
       <BottomSheetTrigger>
-        <div
-          role="button"
-          className="border border-border rounded-lg px-2 py-3 flex justify-between items-center cursor-pointer"
-        >
-          <div>
+        <button className="border border-border rounded-lg px-2 py-3 flex justify-between items-center cursor-pointer">
+          <div className="text-right">
             <h4 className="text-lg font-semibold">{name}</h4>
             <p className="text-sm">{meaning}</p>
           </div>
           <ChevronLeft />
-        </div>
+        </button>
       </BottomSheetTrigger>
       <BottomSheetContent>
         <div className="space-y-4">
