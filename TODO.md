@@ -10,7 +10,7 @@
 
 > Tasks I plan to work on today (max 3–5)
 
-- [ ]
+- [ ] Test `useTodayWord` hook
 
 ---
 
@@ -38,14 +38,8 @@
 
 > Comes after Accessibility
 
-### Setup
-
-- [ ] Setup React Testing Library
-- [ ] Setup jest-axe for A11y testing
-
 ### Unit & Integration
 
-- [ ] Test `useTodayWord` hook
 - [ ] Test Word Card rendering
 - [ ] Test error fallback behavior
 
@@ -154,18 +148,17 @@
 
 ## ✅ Completed
 
-### General
+### 2025-12-27
+
+- [x] Setup React Testing Library
+- [x] Setup axe-vitest and axe-core for A11y testing
+- [x] Test `useTodayWord` hook
+
+### 2025-12-25
 
 - [x] Write to-do list for the most things in the project
-
-### Accessibility
-
 - [x] Accessibility audit for all pages
 - [x] Add aria-labels to icon-only buttons
 - [x] Fix heading hierarchy
 - [x] Add aria-labels to icon-only buttons
 - [x] Full keyboard navigation support
-
-### Testing
-
-- [x]
