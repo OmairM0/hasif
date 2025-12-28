@@ -10,7 +10,7 @@
 
 > Tasks I plan to work on today (max 3–5)
 
-- [ ] Test `useTodayWord` hook
+- [ ]
 
 ---
 
@@ -130,7 +130,6 @@
 > Write them down before forgetting
 
 - [ ] Implement settings page
-- [ ] Add search box in Word's page
 - [ ] Adaptive learning based on favorites
 - [ ] Shareable word image generation
 - [ ] Offline support
@@ -147,6 +146,11 @@
 - Prefer depth over quantity
 
 ## ✅ Completed
+
+### 2025-12-27
+
+- [x] Add search box in Word's page
+- [x] Add debounce to search in words list
 
 ### 2025-12-27
 
