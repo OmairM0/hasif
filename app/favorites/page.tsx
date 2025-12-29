@@ -8,9 +8,11 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div>
+    <>
       <Header title={<h1 className="text-4xl font-bold">المفضلة</h1>} />
-      <FavoritesList />
-    </div>
+      <main>
+        <FavoritesList />
+      </main>
+    </>
   );
 }

@@ -8,7 +8,7 @@ interface IProps {
 const WordsList = ({ words }: IProps) => {
   return (
     <>
-      <section className="mt-4 flex flex-col gap-2 max-h-[75dvh] overflow-auto no-scrollbar">
+      <section className="mt-4 flex flex-col gap-2 max-h-[68dvh] overflow-auto no-scrollbar">
         {words.map((word) => (
           <WordCard word={word} key={word.word} />
         ))}

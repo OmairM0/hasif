@@ -10,9 +10,7 @@
 
 > Tasks I plan to work on today (max 3–5)
 
-- [ ]
-
----
+- ***
 
 ## ♿ Accessibility (A11y)
 
@@ -20,17 +18,11 @@
 
 ### Semantics
 
-- [ ] Remove meaningless `div` usage
-- [ ] Ensure only one `h1` per page
-
 ### Keyboard & Focus
 
 - [ ] Focus trap in modal / bottom sheet
-- [ ] Escape key closes dialogs
 
 ### Screen Readers
-
-- [ ]
 
 ---
 
@@ -147,7 +139,13 @@
 
 ## ✅ Completed
 
-### 2025-12-27
+### 2025-12-29
+
+- [x] Remove meaningless `div` usage
+- [x] Ensure only one `h1` per page
+- [x] Escape key closes dialogs
+
+### 2025-12-28
 
 - [x] Add search box in Word's page
 - [x] Add debounce to search in words list

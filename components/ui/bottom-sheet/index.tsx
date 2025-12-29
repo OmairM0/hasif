@@ -5,7 +5,9 @@ import {
   cloneElement,
   ReactElement,
   ReactNode,
+  useEffect,
   useLayoutEffect,
+  useRef,
   useState,
 } from "react";
 import { cn } from "@/lib/utils";
@@ -42,9 +44,49 @@ function BottomSheetClose({ children }: { children: ClickableElement }) {
 
 function BottomSheetOverlay({ children }: IProps) {
   const { open, setOpen } = useBottomSheet();
+  const sheetRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handleEscapeKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscapeKey);
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [open, setOpen]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const root = document.getElementById("__next") || document.body;
+
+    Array.from(root.children).forEach((child) => {
+      if (!sheetRef.current?.contains(child)) {
+        child.setAttribute("inert", "");
+        child.setAttribute("aria-hidden", "true");
+      }
+    });
+
+    return () => {
+      Array.from(root.children).forEach((child) => {
+        child.removeAttribute("inert");
+        child.removeAttribute("aria-hidden");
+      });
+    };
+  }, [open]);
 
   return (
     <div
+      ref={sheetRef}
+      tabIndex={-1}
+      role="dialog"
+      aria-modal="true"
       className={cn(
         "fixed inset-0 z-50 transition-opacity duration-300",
         open

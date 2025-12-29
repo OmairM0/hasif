@@ -15,10 +15,11 @@ export default async function Page() {
   const words: IWord[] = await data.json();
 
   return (
-    <div>
+    <>
       <Header title={<h1 className="text-4xl font-bold">الكلمات</h1>} />
-
-      <WordsContainer words={words} />
-    </div>
+      <main>
+        <WordsContainer words={words} />
+      </main>
+    </>
   );
 }
