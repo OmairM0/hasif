@@ -1,14 +1,7 @@
 import { useTodayWord } from "@/hooks/useTodayWord";
 import { IWord } from "@/interfaces";
-import { renderHook, waitFor } from "@testing-library/react";
+import { act, renderHook, waitFor } from "@testing-library/react";
 import { fetchRandomWord } from "@/lib/utils";
-// ## useTodayWord Hook Flow:
-// 1. On mount, check if "todayWord" exists in localStorage.
-// 2. If it exists, parse it and check the date.
-//    - If the date matches today, set todayWord state from localStorage.
-//    - If not, fetch a new word, update state and localStorage.
-// 3. If it doesn't exist, fetch a new word, update state and localStorage.
-// 4. Provide a refreshWord function to fetch a new word on demand.
 
 vi.mock("@/lib/utils", () => ({
   fetchRandomWord: vi.fn(),
@@ -88,7 +81,7 @@ describe("useTodayWord hook tests", () => {
     const newWord = { ...mockWord, word: "test Word" };
     vi.mocked(fetchRandomWord).mockResolvedValue(newWord);
 
-    await waitFor(async () => {
+    await act(async () => {
       await result.current.refreshWord();
     });
 

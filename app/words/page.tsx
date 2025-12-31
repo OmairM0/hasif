@@ -1,5 +1,5 @@
 import Header from "@/components/header";
-import WordsContainer from "@/components/WordsContainer";
+import WordsContainer from "@/components/words-container";
 import { IWord } from "@/interfaces";
 import { Metadata } from "next";
 

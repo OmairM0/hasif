@@ -10,7 +10,12 @@
 
 > Tasks I plan to work on today (max 3–5)
 
-- ***
+- [ ] Test error fallback behavior
+- [ ] Accessibility test for Home page
+- [ ] Keyboard navigation tests
+- [ ] Focus management tests
+
+---
 
 ## ♿ Accessibility (A11y)
 
@@ -19,8 +24,6 @@
 ### Semantics
 
 ### Keyboard & Focus
-
-- [ ] Focus trap in modal / bottom sheet
 
 ### Screen Readers
 
@@ -32,14 +35,7 @@
 
 ### Unit & Integration
 
-- [ ] Test Word Card rendering
-- [ ] Test error fallback behavior
-
 ### Accessibility Tests
-
-- [ ] Accessibility test for Home page
-- [ ] Keyboard navigation tests
-- [ ] Focus management tests
 
 ### UX / Behavior
 
@@ -139,11 +135,16 @@
 
 ## ✅ Completed
 
+### 2025-12-30
+
+- [x] Test Word Card rendering
+
 ### 2025-12-29
 
 - [x] Remove meaningless `div` usage
 - [x] Ensure only one `h1` per page
 - [x] Escape key closes dialogs
+- [x] Focus trap in modal / bottom sheet
 
 ### 2025-12-28
 

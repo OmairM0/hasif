@@ -1,7 +1,7 @@
 "use client";
 import { IWord } from "@/interfaces";
-import SearchWord from "./SearchWord";
-import WordsList from "./WordsList";
+import SearchWord from "./search-word";
+import WordsList from "./words-list";
 import { useMemo, useState } from "react";
 import { useDebounce } from "@/hooks/useDebounce";
 

@@ -21,7 +21,10 @@ export default function WordCard({ word }: IProps) {
   return (
     <BottomSheet>
       <BottomSheetTrigger>
-        <button className="border border-border rounded-lg px-2 py-3 flex justify-between items-center cursor-pointer">
+        <button
+          aria-label={`فتح تفاصيل كلمة ${word.word}`}
+          className="border border-border rounded-lg px-2 py-3 flex justify-between items-center cursor-pointer"
+        >
           <div className="text-right">
             <h4 className="text-lg font-semibold">{name}</h4>
             <p className="text-sm">{meaning}</p>
