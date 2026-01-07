@@ -10,11 +10,6 @@
 
 > Tasks I plan to work on today (max 3–5)
 
-- [ ] Test error fallback behavior
-- [ ] Accessibility test for Home page
-- [ ] Keyboard navigation tests
-- [ ] Focus management tests
-
 ---
 
 ## ♿ Accessibility (A11y)
@@ -49,10 +44,6 @@
 > Only after A11y & Testing foundations
 
 ### Core Animations
-
-- [ ] Animate Word of the Day transition
-- [ ] Favorite button micro-interaction
-- [ ] Skeleton loading animation
 
 ### Architecture
 
@@ -135,9 +126,17 @@
 
 ## ✅ Completed
 
+### 2026-01-07
+
+- [x] Animate Word of the Day transition
+- [x] Random Word button micro-interaction
+- [x] Favorite button micro-interaction
+- [x] Animate Wrods list and Favorites list
+
 ### 2025-12-30
 
 - [x] Test Word Card rendering
+- [x] Accessibility test for Home page
 
 ### 2025-12-29
 

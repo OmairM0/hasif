@@ -1,8 +1,8 @@
 import { IWord } from "@/interfaces";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import WordCard from "@/components/word-card";
-import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import userEvent from "@testing-library/user-event";
+import { renderWithProviders } from "../test-utils/renderWithProviders";
 
 const mockWord: IWord = {
   word: "صدق",
@@ -13,9 +13,6 @@ const mockWord: IWord = {
   category: "قيم",
   rarity: 3,
 };
-
-const renderWithProviders = (ui: React.ReactNode) =>
-  render(<FavoritesProvider>{ui}</FavoritesProvider>);
 
 const renderWordCard = () => renderWithProviders(<WordCard word={mockWord} />);
 
