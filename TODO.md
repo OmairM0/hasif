@@ -10,6 +10,8 @@
 
 > Tasks I plan to work on today (max 3–5)
 
+- [ ] Add dark mode
+
 ---
 
 ## ♿ Accessibility (A11y)
@@ -44,16 +46,6 @@
 > Only after A11y & Testing foundations
 
 ### Core Animations
-
-### Architecture
-
-- [ ] Centralize animation tokens (duration, easing)
-- [ ] Separate animation logic from UI logic
-
-### Advanced
-
-- [ ] Shared element transition (list → details)
-- [ ] GSAP experiment for word transitions
 
 ---
 

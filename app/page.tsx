@@ -7,7 +7,12 @@ import { Settings } from "lucide-react";
 export default function Home() {
   return (
     <>
-      <Header title={<Logo />} icon={<Settings aria-hidden="true" />} />
+      <Header
+        title={<Logo />}
+        icon={
+          <Settings size={20} aria-hidden="true" className="cursor-pointer" />
+        }
+      />
       <main>
         <TodayWord />
         {/* <AnimatedCom /> */}

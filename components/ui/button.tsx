@@ -27,10 +27,20 @@ const Button = forwardRef<HTMLButtonElement, IProps>(
     },
     ref
   ) => {
+    // const variantStyles = {
+    //   primary: "bg-foreground text-background hover:bg-foreground-hover",
+    //   secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300",
+    //   outline: "border border-gray-300 text-gray-800 hover:bg-gray-100",
+    //   destructive: "bg-red-600 text-white hover:bg-red-700",
+    // };
+
     const variantStyles = {
-      primary: "bg-foreground text-white hover:bg-foreground-hover",
-      secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300",
-      outline: "border border-gray-300 text-gray-800 hover:bg-gray-100",
+      primary: "bg-foreground text-background hover:bg-foreground-hover",
+
+      secondary: "bg-muted text-foreground hover:bg-muted/80",
+
+      outline: "border border-border text-foreground hover:bg-muted",
+
       destructive: "bg-red-600 text-white hover:bg-red-700",
     };
 

@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import ThemeSwitcher from "./theme-switcher";
 
 interface IProps {
   title: ReactNode;
@@ -10,11 +11,14 @@ const Header = ({ title, icon }: IProps) => {
     <header className="flex justify-between items-center">
       {title}
 
-      {icon && (
-        <button aria-label="settings" tabIndex={0}>
-          {icon}
-        </button>
-      )}
+      <div className="flex gap-2 items-center">
+        <ThemeSwitcher />
+        {icon && (
+          <button aria-label="settings" tabIndex={0}>
+            {icon}
+          </button>
+        )}
+      </div>
     </header>
   );
 };
