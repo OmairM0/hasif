@@ -1,5 +1,5 @@
 import { IWord } from "@/interfaces";
-import { fetchRandomWord } from "@/lib/utils";
+import { fetchRandomWord } from "@/services/wordsService";
 import { useEffect, useState } from "react";
 
 const exampleWord: IWord = {

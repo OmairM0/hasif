@@ -1,6 +1,6 @@
 import Header from "@/components/header";
 import WordsContainer from "@/components/words-container";
-import { IWord } from "@/interfaces";
+import { getWords } from "@/services/wordsService";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,11 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const data = await fetch(`${apiUrl}/api/words`, {
-    cache: "no-store",
-  });
-  const words: IWord[] = await data.json();
+  const words = await getWords();
 
   return (
     <>
