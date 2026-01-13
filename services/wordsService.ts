@@ -1,7 +1,7 @@
 import { IWord } from "@/interfaces";
 
 export async function getWords(): Promise<IWord[]> {
-  const res = await fetch(`${process.env.API_URL}/words`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/words`, {
     next: { revalidate: 60 },
   });
 
@@ -13,9 +13,7 @@ export async function getWords(): Promise<IWord[]> {
 }
 
 export async function fetchRandomWord(): Promise<IWord> {
-  const res = await fetch(`${process.env.API_URL}/words/random`, {
-    next: { revalidate: 86400 }, // full day
-  });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/words/random`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch random word");
