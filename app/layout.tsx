@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
-import { ibmPlexSans } from "./fonts/font";
+// import { ibmPlexSans } from "./fonts/font";
+import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 import BottomNavbar from "@/components/bottom-navbar";
 import { FavoritesClientProvider } from "@/providers/FavoritesClientProvider";
 import { Analytics } from "@vercel/analytics/next";
+
+const ibmPlexSans = IBM_Plex_Sans_Arabic({
+  variable: "--font-ibm-plex-sans",
+  subsets: ["arabic", "latin"],
+  weight: "400",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -55,7 +62,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className={`${ibmPlexSans.variable} antialiased`}>
+      <body className={`${ibmPlexSans.className} antialiased`}>
         <div className="max-w-4xl md:mx-auto h-full p-4 bg-background min-h-dvh flex flex-col">
           <>
             <FavoritesClientProvider>{children}</FavoritesClientProvider>

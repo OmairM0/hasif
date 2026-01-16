@@ -43,7 +43,7 @@ body {
   /* background: var(--color-background); */
   background: #fdfbf7;
   color: var(--color-foreground);
-  font-family: var(--font-sans), sans-serif;
+  /* font-family: var(--font-sans), sans-serif; */
   /* font-family: var(--font-ibm-plex-sans), sans-serif; */
 }
 
