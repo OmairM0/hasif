@@ -54,8 +54,10 @@ export function useTodayWord() {
   }, []);
 
   const refreshWord = async () => {
+    setIsLoading(true);
     const word = await fetchRandomWord();
     setTodayWord(word);
+    setIsLoading(false);
   };
 
   return { todayWord, isLoading, refreshWord };
