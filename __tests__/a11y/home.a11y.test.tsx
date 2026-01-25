@@ -1,4 +1,4 @@
-import Home from "@/app/page";
+import Home from "@/app/(public)/page";
 import { axe } from "vitest-axe";
 import { renderWithProviders } from "../test-utils/renderWithProviders";
 

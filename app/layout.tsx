@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-// import { ibmPlexSans } from "./fonts/font";
 import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
-import BottomNavbar from "@/components/bottom-navbar";
 import { FavoritesClientProvider } from "@/providers/FavoritesClientProvider";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -63,13 +61,8 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className={`${ibmPlexSans.className} antialiased`}>
-        <div className="max-w-4xl md:mx-auto h-full p-4 bg-background min-h-dvh flex flex-col">
-          <>
-            <FavoritesClientProvider>{children}</FavoritesClientProvider>
-          </>
-          <div className="mt-auto p-2">
-            <BottomNavbar />
-          </div>
+        <div className="max-w-4xl md:mx-auto h-full p-4 bg-background min-h-dvh">
+          <FavoritesClientProvider>{children}</FavoritesClientProvider>
         </div>
         <Analytics />
       </body>
