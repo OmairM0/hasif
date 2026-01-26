@@ -3,6 +3,7 @@ import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 import { FavoritesClientProvider } from "@/providers/FavoritesClientProvider";
 import { Analytics } from "@vercel/analytics/next";
+import { Toaster } from "sonner";
 
 const ibmPlexSans = IBM_Plex_Sans_Arabic({
   variable: "--font-ibm-plex-sans",
@@ -64,6 +65,7 @@ export default function RootLayout({
         <div className="max-w-4xl md:mx-auto h-full p-4 bg-background min-h-dvh">
           <FavoritesClientProvider>{children}</FavoritesClientProvider>
         </div>
+        <Toaster position="top-center" />
         <Analytics />
       </body>
     </html>

@@ -1,4 +1,5 @@
 import { getToken } from "@/utils/session";
+import { ApiError } from "./apiError";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
@@ -17,10 +18,17 @@ export async function apiFetch<T>(
     },
   });
 
+  const isJson = res.headers.get("content-type")?.includes("application/json");
+
+  const body = isJson ? await res.json() : null;
+
   if (!res.ok) {
-    const error = await res.json().catch(() => ({}));
-    throw new Error(error.message || "Request failed");
+    throw new ApiError(
+      body?.message || "Request failed",
+      res.status,
+      body?.errors,
+    );
   }
 
-  return res.json() as Promise<T>;
+  return body as T;
 }

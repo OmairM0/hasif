@@ -10,9 +10,12 @@ export const metadata: Metadata = {
 export default async function Page() {
   return (
     <>
-      <Header title={<h1 className="text-4xl font-bold">تسجيل الدخول</h1>} />
+      <Header title={<h1 className="text-4xl font-bold">حصيف</h1>} />
       <main className="mt-4">
-        <h2 className="text-center font-bold">اهلاً بك👋، قم بتسجيل الدخول</h2>
+        <h1 className="text-center text-3xl font-bold">تسجيل الدخول</h1>
+        <h2 className="text-center text-sm mt-4 font-bold">
+          اهلاً بك👋، قم بتسجيل الدخول
+        </h2>
         <LoginForm />
         {/* <Link
           href="/register"

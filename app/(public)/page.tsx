@@ -2,7 +2,6 @@
 import Header from "@/components/header";
 import Logo from "@/components/logo";
 import TodayWord from "@/components/today-word";
-import Button from "@/components/ui/button";
 import Link from "next/link";
 
 export default function Home() {

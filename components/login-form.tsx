@@ -3,36 +3,54 @@ import { apiFetch } from "@/services/api";
 import Button from "./ui/button";
 import Input from "./ui/Input";
 import { setToken } from "@/utils/session";
-import { FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "@/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
+import { LoginResponse } from "@/types/api/auth";
+import { ApiResponse } from "@/types/common";
+import { toast } from "sonner";
+import { ApiError } from "@/services/apiError";
+import MiniSpinner from "./ui/mini-spinner";
+import { useRouter } from "next/navigation";
 
 type LoginForm = z.infer<typeof loginSchema>;
 export default function LoginForm() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
   });
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const onSubmit = async (data: LoginForm) => {
-    const response = await apiFetch<{ data: { token: string } }>(
-      "/auth/login",
-      {
-        method: "POST",
-        body: JSON.stringify(data),
-      },
-    );
+    try {
+      const response = await apiFetch<ApiResponse<LoginResponse>>(
+        "/auth/login",
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+        },
+      );
 
-    console.log(response);
-    setToken(response.data.token);
+      setToken(response.data.token);
+      router.push("/dashboard");
+      toast.success("تم تسجيل الدخول بنجاح");
+    } catch (err) {
+      if (err instanceof ApiError) {
+        if (err.status === 401) {
+          toast.error("البريد الإلكتروني أو كلمة المرور غير صحيحة");
+        } else {
+          toast.error(err.message);
+        }
+      } else {
+        toast.error("حدث خطأ غير متوقع");
+      }
+    }
   };
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -58,7 +76,9 @@ export default function LoginForm() {
       {errors.password && (
         <p className="text-red-500 text-sm">{errors.password.message}</p>
       )}
-      <Button type="submit">تسجيل الدخول</Button>
+      <Button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? <MiniSpinner /> : "تسجيل الدخول"}
+      </Button>
     </form>
   );
 }
