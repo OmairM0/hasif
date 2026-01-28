@@ -7,7 +7,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="min-h-[calc(100vh-2rem)] flex flex-col">
+    <div className="min-h-dvh flex flex-col p-4">
       {children}
       <div className="mt-auto p-2">
         <BottomNavbar />

@@ -5,7 +5,6 @@
   --color-background: #ffffff;
   --color-foreground: #030213;
   --color-foreground-hover: #1a1a2b;
-
   --color-muted: #ececf0;
   --color-muted-foreground: #717182;
   --color-border: #e5e7eb;
@@ -41,7 +40,7 @@
 
 body {
   /* background: var(--color-background); */
-  background: #fdfbf7;
+  /* background: #e9e3da; */
   color: var(--color-foreground);
   /* font-family: var(--font-sans), sans-serif; */
   /* font-family: var(--font-ibm-plex-sans), sans-serif; */

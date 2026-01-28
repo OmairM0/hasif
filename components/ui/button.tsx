@@ -1,7 +1,12 @@
 import { cn } from "@/lib/utils";
 import { ButtonHTMLAttributes, forwardRef, ReactNode } from "react";
 
-type buttonVariant = "primary" | "secondary" | "outline" | "destructive";
+type buttonVariant =
+  | "primary"
+  | "secondary"
+  | "outline"
+  | "destructive"
+  | "ghost";
 type buttonSizes = "sm" | "md" | "lg";
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -25,15 +30,8 @@ const Button = forwardRef<HTMLButtonElement, IProps>(
       className,
       ...props
     },
-    ref
+    ref,
   ) => {
-    // const variantStyles = {
-    //   primary: "bg-foreground text-background hover:bg-foreground-hover",
-    //   secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300",
-    //   outline: "border border-gray-300 text-gray-800 hover:bg-gray-100",
-    //   destructive: "bg-red-600 text-white hover:bg-red-700",
-    // };
-
     const variantStyles = {
       primary: "bg-foreground text-background hover:bg-foreground-hover",
 
@@ -42,6 +40,8 @@ const Button = forwardRef<HTMLButtonElement, IProps>(
       outline: "border border-border text-foreground hover:bg-muted",
 
       destructive: "bg-red-600 text-white hover:bg-red-700",
+
+      ghost: "bg-transparent text-foreground hover:bg-muted",
     };
 
     const sizeStyles = {
@@ -56,7 +56,7 @@ const Button = forwardRef<HTMLButtonElement, IProps>(
           "inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition-colors disabled:opacity-60 disabled:cursor-not-allowed",
           variantStyles[variant],
           sizeStyles[size],
-          className
+          className,
         )}
         disabled={isLoading || props.disabled}
         {...props}
@@ -82,7 +82,7 @@ const Button = forwardRef<HTMLButtonElement, IProps>(
         {!isLoading && rightIcon && <span>{rightIcon}</span>}
       </button>
     );
-  }
+  },
 );
 
 Button.displayName = "Button";
