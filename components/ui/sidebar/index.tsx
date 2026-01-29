@@ -58,6 +58,10 @@ function Sidebar({ children, side = "start", className }: SidebarProps) {
   );
 }
 
+function SidebarHeader({ children }: { children: ReactNode }) {
+  return <div className="flex flex-col gap-2 p-2 mt-2">{children}</div>;
+}
+
 function SidebarContent({ children }: { children: ReactNode }) {
   return <nav className="flex flex-col gap-2 p-2">{children}</nav>;
 }
@@ -110,6 +114,7 @@ function SidebarTrigger({ className, ...props }: SidebarTriggerProps) {
 export {
   SidebarProvider,
   Sidebar,
+  SidebarHeader,
   SidebarContent,
   SidebarItem,
   SidebarList,

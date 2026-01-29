@@ -62,7 +62,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className={`${ibmPlexSans.className} antialiased`}>
-        <div className="md:mx-auto h-full  bg-background min-h-dvh">
+        <div className="md:mx-auto h-full  min-h-dvh">
           <FavoritesClientProvider>{children}</FavoritesClientProvider>
         </div>
         <Toaster position="top-center" />

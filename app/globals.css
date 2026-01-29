@@ -39,11 +39,8 @@
 }
 
 body {
-  /* background: var(--color-background); */
-  /* background: #e9e3da; */
+  background: var(--color-background);
   color: var(--color-foreground);
-  /* font-family: var(--font-sans), sans-serif; */
-  /* font-family: var(--font-ibm-plex-sans), sans-serif; */
 }
 
 /* hide scrollbar but keep scrolling */

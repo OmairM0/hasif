@@ -7,7 +7,7 @@ export async function apiFetch<T>(
   url: string,
   options: RequestInit = {},
 ): Promise<T> {
-  const token = getToken();
+  const token = await getToken();
 
   const res = await fetch(`${API_URL}${url}`, {
     ...options,

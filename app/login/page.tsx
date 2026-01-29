@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   return (
-    <>
+    <div className="max-w-6xl mx-auto min-h-dvh flex flex-col p-4">
       <Header title={<h1 className="text-4xl font-bold">حصيف</h1>} />
       <main className="mt-4">
         <h1 className="text-center text-3xl font-bold">تسجيل الدخول</h1>
@@ -30,6 +30,6 @@ export default async function Page() {
           العودة إلى الصفحة الرئيسية
         </Link>
       </main>
-    </>
+    </div>
   );
 }
