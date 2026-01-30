@@ -3,13 +3,39 @@ import "../globals.css";
 import {
   Sidebar,
   SidebarContent,
+  SidebarGroup,
   SidebarHeader,
-  SidebarItem,
-  SidebarList,
+  SidebarInset,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { GalleryVerticalEnd, List } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+
+const menuItems = [
+  {
+    title: "الكلمات",
+    icon: List,
+    href: "/dashboard/words",
+  },
+  {
+    title: "التصنيفات",
+    icon: GalleryVerticalEnd,
+    href: "/dashboard/categories",
+  },
+];
 
 export default function RootLayout({
   children,
@@ -19,22 +45,62 @@ export default function RootLayout({
   return (
     <div className="flex">
       <SidebarProvider>
-        <Sidebar defaultOpen={true}>
+        <Sidebar side="right" collapsible="icon">
           <SidebarHeader>
-            <h1 className="text-3xl font-bold text-center">حصيف</h1>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton size="lg" asChild>
+                  <Link href="/dashboard">
+                    <div className="flex items-center justify-center bg-foreground text-background aspect-square px-3 py-1 text-sm font-black rounded-lg">
+                      ح
+                    </div>
+                    <h1 className="text-3xl font-bold text-center">حصيف</h1>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
           </SidebarHeader>
           <SidebarContent>
-            <SidebarList>
-              <SidebarItem>
-                <Link href="/dashboard/words">الكلمات</Link>
-              </SidebarItem>
-              <SidebarItem>
-                <Link href="/dashboard/categories">التصنيفات</Link>
-              </SidebarItem>
-            </SidebarList>
+            <SidebarGroup>
+              <SidebarMenu>
+                {menuItems.map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild>
+                      <Link href={item.href}>
+                        <item.icon />
+                        {item.title}
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroup>
           </SidebarContent>
         </Sidebar>
-        <div className="flex-1 p-2">
+        <SidebarInset>
+          <header className="flex h-16 shrink-0 items-center gap-2 px-4">
+            <SidebarTrigger className="-ml-1" />
+            <Separator
+              orientation="vertical"
+              className="mr-2 data-[orientation=vertical]:h-4"
+            />
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem className="hidden md:block">
+                  <BreadcrumbLink href="#">
+                    Building Your Application
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="hidden md:block" />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </header>
+          <div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>
+        </SidebarInset>
+        {/* <div className="flex-1 p-2">
           <div className="flex">
             <SidebarTrigger />
             <div className="flex-1">
@@ -45,7 +111,7 @@ export default function RootLayout({
           </div>
 
           <main className="mt-4">{children}</main>
-        </div>
+        </div> */}
       </SidebarProvider>
     </div>
   );

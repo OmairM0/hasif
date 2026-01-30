@@ -3,11 +3,13 @@
 import { IWord } from "@/interfaces";
 import { ChevronLeft, Star, StarOff } from "lucide-react";
 import {
-  BottomSheet,
-  BottomSheetContent,
-  BottomSheetTrigger,
-} from "./ui/bottom-sheet";
-import Button from "./ui/button";
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Button } from "./ui/button";
 import { useFavorites } from "@/contexts/FavoritesContext";
 
 interface IProps {
@@ -19,8 +21,8 @@ export default function WordCard({ word }: IProps) {
   const { addWord, removeWord, isFavorite } = useFavorites();
 
   return (
-    <BottomSheet>
-      <BottomSheetTrigger>
+    <Drawer>
+      <DrawerTrigger asChild>
         <button
           aria-label={`فتح تفاصيل كلمة ${word.word}`}
           className="border border-border rounded-lg px-2 py-3 flex justify-between items-center cursor-pointer"
@@ -31,13 +33,17 @@ export default function WordCard({ word }: IProps) {
           </div>
           <ChevronLeft />
         </button>
-      </BottomSheetTrigger>
-      <BottomSheetContent>
-        <div className="space-y-4">
-          <h3 className="text-3xl font-bold">{word.word}</h3>
-          <div>
-            <p className="text-lg italic">{word.diacritic}</p>
-          </div>
+      </DrawerTrigger>
+      <DrawerContent>
+        <div className="space-y-4 p-4">
+          <DrawerHeader className="text-right">
+            <DrawerTitle >
+              <h3 className="text-3xl font-bold">{word.word}</h3>
+            </DrawerTitle>
+            <div>
+              <p className="text-lg italic">{word.diacritic}</p>
+            </div>
+          </DrawerHeader>
           <div>
             <p className="font-bold text-lg">المعنى</p>
             <p className="text-base">{word.meaning}</p>
@@ -55,24 +61,24 @@ export default function WordCard({ word }: IProps) {
             {isFavorite(word.word) ? (
               <Button
                 variant="secondary"
-                icon={<StarOff size={20} />}
                 className="mx-auto rounded-3xl"
                 onClick={() => removeWord(word.word)}
               >
+                <StarOff size={20} />
                 حذف من المفضلة
               </Button>
             ) : (
               <Button
-                icon={<Star size={20} />}
                 className="mx-auto rounded-3xl"
                 onClick={() => addWord(word)}
               >
+                <Star size={20} />
                 إضافة للمفضلة
               </Button>
             )}
           </div>
         </div>
-      </BottomSheetContent>
-    </BottomSheet>
+      </DrawerContent>
+    </Drawer>
   );
 }

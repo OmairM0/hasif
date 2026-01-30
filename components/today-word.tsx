@@ -1,8 +1,8 @@
 "use client";
-import Button from "./ui/button";
+import { Button } from "./ui/button";
 import { Shuffle, Star, StarOff } from "lucide-react";
 import MainCard from "./main-card";
-import Spinner from "./ui/spinner";
+import { Spinner } from "./ui/spinner";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useTodayWord } from "@/hooks/useTodayWord";
 import { motion } from "motion/react";
@@ -33,12 +33,12 @@ export default function TodayWord() {
             <MotionButton
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.95 }}
-              icon={<Shuffle size={20} />}
               className="w-full rounded-3xl"
               onClick={async () => {
                 refreshWord();
               }}
             >
+              <Shuffle size={20} />
               كلمة عشوائية
             </MotionButton>
 
@@ -47,10 +47,10 @@ export default function TodayWord() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.95 }}
                 variant="secondary"
-                icon={<StarOff size={20} />}
                 className="w-full rounded-3xl"
                 onClick={() => removeWord(todayWord!.word)}
               >
+                <StarOff size={20} />
                 حذف من المفضلة
               </MotionButton>
             ) : (
@@ -58,10 +58,10 @@ export default function TodayWord() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.95 }}
                 variant="secondary"
-                icon={<Star size={20} />}
                 className="w-full rounded-3xl"
                 onClick={() => addWord(todayWord!)}
               >
+                <Star size={20} />
                 إضافة للمفضلة
               </MotionButton>
             )}

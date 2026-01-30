@@ -1,7 +1,7 @@
 "use client";
-import Button from "@/components/ui/button";
-import Input from "@/components/ui/Input";
-import MiniSpinner from "@/components/ui/mini-spinner";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import Spinner from "@/old-components/ui/spinner";
 import { createCategorySchema } from "@/schema";
 import { apiFetch } from "@/services/api";
 import { ApiError } from "@/services/apiError";
@@ -82,7 +82,7 @@ export default function CreateCategory() {
           )}
         </div>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? <MiniSpinner /> : "حفظ"}
+          {isSubmitting ? <Spinner /> : "حفظ"}
         </Button>
       </form>
     </>

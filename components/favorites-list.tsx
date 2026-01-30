@@ -3,7 +3,7 @@
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { Star } from "lucide-react";
 import WordCard from "./word-card";
-import Spinner from "./ui/spinner";
+import { Spinner } from "./ui/spinner";
 import * as motion from "motion/react-client";
 import { AnimatePresence } from "motion/react";
 

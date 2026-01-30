@@ -1,7 +1,6 @@
 "use client";
 import { apiFetch } from "@/services/api";
-import Button from "./ui/button";
-import Input from "./ui/Input";
+import { Button } from "./ui/button";
 import { setToken } from "@/utils/session";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "@/schema";
@@ -11,8 +10,9 @@ import { LoginResponse } from "@/types/api/auth";
 import { ApiResponse } from "@/types/common";
 import { toast } from "sonner";
 import { ApiError } from "@/services/apiError";
-import MiniSpinner from "./ui/mini-spinner";
+import { Spinner } from "./ui/spinner";
 import { useRouter } from "next/navigation";
+import { Input } from "./ui/input";
 
 type LoginForm = z.infer<typeof loginSchema>;
 export default function LoginForm() {
@@ -77,7 +77,7 @@ export default function LoginForm() {
         <p className="text-red-500 text-sm">{errors.password.message}</p>
       )}
       <Button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? <MiniSpinner /> : "تسجيل الدخول"}
+        {isSubmitting ? <Spinner /> : "تسجيل الدخول"}
       </Button>
     </form>
   );
