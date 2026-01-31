@@ -4,6 +4,7 @@ import "./globals.css";
 import { FavoritesClientProvider } from "@/providers/FavoritesClientProvider";
 import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "sonner";
+import { DirectionProvider } from "@/components/ui/direction";
 
 const ibmPlexSans = IBM_Plex_Sans_Arabic({
   variable: "--font-ibm-plex-sans",
@@ -62,9 +63,11 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className={`${ibmPlexSans.className} antialiased`}>
-        <div className="md:mx-auto h-full  min-h-dvh">
-          <FavoritesClientProvider>{children}</FavoritesClientProvider>
-        </div>
+        <DirectionProvider dir="rtl">
+          <div className="md:mx-auto h-full  min-h-dvh">
+            <FavoritesClientProvider>{children}</FavoritesClientProvider>
+          </div>
+        </DirectionProvider>
         <Toaster position="top-center" />
         <Analytics />
       </body>
