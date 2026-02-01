@@ -1,4 +1,4 @@
-import CreateCategory from "@/components/create-category";
+import CategoriesList from "@/components/categories-list";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="flex flex-col">
-      <CreateCategory />
+      <CategoriesList />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import CreateCategory from "@/components/create-category";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "التصنيفات",
+  title: "إضافة كلمة",
 };
 
 export default function Page() {

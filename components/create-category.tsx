@@ -8,13 +8,30 @@ import { ApiError } from "@/services/apiError";
 import { ApiResponse } from "@/types/common";
 import { Category } from "@/types/models/category";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
 
 type createCategoryForm = z.infer<typeof createCategorySchema>;
 
-export default function CreateCategory() {
+type CategoryFormMode = "create" | "edit";
+
+type CategoryFormProps = {
+  mode: CategoryFormMode;
+  initialValues?: {
+    id: string;
+    name: string;
+    description?: string;
+  };
+  onSubmitSuccess?: (category: Category) => void;
+};
+
+export default function CategoryForm({
+  mode,
+  initialValues,
+  onSubmitSuccess,
+}: CategoryFormProps) {
   const {
     register,
     handleSubmit,
@@ -22,7 +39,20 @@ export default function CreateCategory() {
     formState: { errors, isSubmitting },
   } = useForm<createCategoryForm>({
     resolver: zodResolver(createCategorySchema),
+    defaultValues: {
+      name: initialValues?.name ?? "",
+      description: initialValues?.description ?? "",
+    },
   });
+
+  useEffect(() => {
+    if (initialValues) {
+      reset({
+        name: initialValues.name,
+        description: initialValues.description ?? "",
+      });
+    }
+  }, [initialValues, reset]);
 
   const onSubmit = async (data: createCategoryForm) => {
     const payload = {
@@ -33,13 +63,19 @@ export default function CreateCategory() {
     };
 
     try {
-      await apiFetch<ApiResponse<Category>>("/categories", {
-        method: "POST",
-        body: JSON.stringify(payload),
-      });
+      const category = await apiFetch<ApiResponse<Category>>(
+        mode === "create" ? "/categories" : `/categories/${initialValues?.id}`,
+        {
+          method: mode === "create" ? "POST" : "PATCH",
+          body: JSON.stringify(payload),
+        },
+      );
 
       reset();
-      toast.success("تم إضافة التصنيف بنجاح");
+      toast.success(
+        mode === "create" ? "تم إضافة التصنيف بنجاح" : "تم تحديث التصنيف بنجاح",
+      );
+      onSubmitSuccess?.(category.data);
     } catch (err) {
       if (err instanceof ApiError) {
         if (err.status === 409) {
@@ -55,11 +91,7 @@ export default function CreateCategory() {
 
   return (
     <>
-      <h2>إضافة تصنيف</h2>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="mt-4 flex flex-col gap-4"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
           <label htmlFor="name">التصنيف</label>
           <Input
@@ -82,7 +114,7 @@ export default function CreateCategory() {
           )}
         </div>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? <Spinner /> : "حفظ"}
+          {isSubmitting ? <Spinner /> : mode === "create" ? "حفظ" : "تحديث"}
         </Button>
       </form>
     </>
