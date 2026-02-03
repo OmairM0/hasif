@@ -1,7 +1,7 @@
 "use client";
 // import * as motion from "motion/react-client";
 import { motion } from "motion/react";
-import Button from "./ui/button";
+import { Button } from "./ui/button";
 
 const MotionButton = motion.create(Button);
 
