@@ -33,7 +33,7 @@ import { Category } from "@/types/models/category";
 import { MoreHorizontalIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import CategoryForm from "./create-category";
+import CategoryForm from "./category-form";
 
 export default function CategoriesList() {
   const [loading, setLoading] = useState(true);

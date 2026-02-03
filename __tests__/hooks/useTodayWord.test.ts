@@ -1,20 +1,20 @@
 import { useTodayWord } from "@/hooks/useTodayWord";
-import { IWord } from "@/interfaces";
 import { act, renderHook, waitFor } from "@testing-library/react";
-import { fetchRandomWord } from "@/lib/utils";
+// import { fetchRandomWord } from "@/lib/utils";
+import { Word } from "@/types/models/word";
+import { fetchRandomWord } from "@/services/wordsService";
 
 vi.mock("@/lib/utils", () => ({
   fetchRandomWord: vi.fn(),
 }));
 
-const mockWord: IWord = {
+const mockWord: Word = {
   word: "صدق",
   diacritic: "صِدق",
   meaning: "قول الحق",
   explanation: "عكس الكذب",
   example: "الصدق منجاة",
   category: "قيم",
-  rarity: 3,
 };
 
 const today = new Date().toDateString();
@@ -28,7 +28,7 @@ describe("useTodayWord hook tests", () => {
   it("loads word from localStorage if date is today", async () => {
     localStorage.setItem(
       "todayWord",
-      JSON.stringify({ word: mockWord, date: today })
+      JSON.stringify({ word: mockWord, date: today }),
     );
 
     const { result } = renderHook(() => useTodayWord());
@@ -58,7 +58,7 @@ describe("useTodayWord hook tests", () => {
       JSON.stringify({
         word: mockWord,
         date: "OLD_DATE",
-      })
+      }),
     );
 
     vi.mocked(fetchRandomWord).mockResolvedValue(mockWord);

@@ -1,4 +1,4 @@
-import CreateCategory from "@/components/create-category";
+import WordForm from "@/components/word-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,7 +8,8 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="flex flex-col">
-      <CreateCategory />
+      <h2 className="text-xl font-bold mb-4">إضافة كلمة</h2>
+      <WordForm mode="create" />
     </div>
   );
 }

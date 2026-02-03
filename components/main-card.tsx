@@ -1,7 +1,7 @@
-import { IWord } from "@/interfaces";
+import { Word } from "@/types/models/word";
 
 interface IProps {
-  word: IWord;
+  word: Word;
 }
 
 const MainCard = ({ word }: IProps) => {

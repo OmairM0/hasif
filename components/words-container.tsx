@@ -1,12 +1,12 @@
 "use client";
-import { IWord } from "@/interfaces";
 import SearchWord from "./search-word";
 import WordsList from "./words-list";
 import { useMemo, useState } from "react";
 import { useDebounce } from "@/hooks/useDebounce";
+import { Word } from "@/types/models/word";
 
 interface IProps {
-  words: IWord[];
+  words: Word[];
 }
 
 const WordsContainer = ({ words }: IProps) => {
@@ -19,7 +19,7 @@ const WordsContainer = ({ words }: IProps) => {
     const q = debouncedQuery.toLocaleLowerCase();
 
     return words.filter(
-      (word) => word.word.includes(q) || word.meaning.includes(q)
+      (word) => word.word.includes(q) || word.meaning.includes(q),
     );
   }, [debouncedQuery, words]);
 

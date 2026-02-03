@@ -1,10 +1,10 @@
-import { IWord } from "@/interfaces";
+import { Word } from "@/types/models/word";
 import { useEffect, useState } from "react";
 
 const STORAGE_KEY = "favoritesWords";
 
 export function useFavoritesState() {
-  const [favorites, setFavorites] = useState<IWord[]>([]);
+  const [favorites, setFavorites] = useState<Word[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   // load from localStorage (once)
@@ -39,9 +39,9 @@ export function useFavoritesState() {
     return () => window.removeEventListener("storage", onStorageChange);
   }, []);
 
-  const addWord = (word: IWord) => {
+  const addWord = (word: Word) => {
     setFavorites((prev) =>
-      prev.some((w) => w.word === word.word) ? prev : [...prev, word]
+      prev.some((w) => w.word === word.word) ? prev : [...prev, word],
     );
   };
 

@@ -1,6 +1,6 @@
-import { IWord } from "@/interfaces";
+import { Word } from "@/types/models/word";
 
-export async function getWords(): Promise<IWord[]> {
+export async function getWords(): Promise<Word[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/words`, {
     next: { revalidate: 60 },
   });
@@ -12,7 +12,7 @@ export async function getWords(): Promise<IWord[]> {
   return (await res.json()).data;
 }
 
-export async function fetchRandomWord(): Promise<IWord> {
+export async function fetchRandomWord(): Promise<Word> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/words/random`);
 
   if (!res.ok) {

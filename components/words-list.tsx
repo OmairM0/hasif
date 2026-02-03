@@ -1,10 +1,10 @@
 import * as motion from "motion/react-client";
-import { IWord } from "@/interfaces";
 import WordCard from "./word-card";
 import { AnimatePresence } from "motion/react";
+import { Word } from "@/types/models/word";
 
 interface IProps {
-  words: IWord[];
+  words: Word[];
 }
 
 const containerVariants = {

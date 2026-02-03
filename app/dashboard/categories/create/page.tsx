@@ -1,4 +1,4 @@
-import CategoryForm from "@/components/create-category";
+import CategoryForm from "@/components/category-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -1,25 +1,23 @@
-import { IWord } from "@/interfaces";
 import { screen } from "@testing-library/react";
 import WordCard from "@/components/word-card";
 import userEvent from "@testing-library/user-event";
 import { renderWithProviders } from "../test-utils/renderWithProviders";
+import { Word } from "@/types/models/word";
 
-const mockWord: IWord = {
+const mockWord: Word = {
   word: "صدق",
   diacritic: "صِدق",
   meaning: "قول الحق",
   explanation: "عكس الكذب",
   example: "الصدق منجاة",
   category: "قيم",
-  rarity: 3,
 };
 
 const renderWordCard = () => renderWithProviders(<WordCard word={mockWord} />);
 
 vi.mock("@/contexts/FavoritesContext", async (importOriginal) => {
-  const actual = await importOriginal<
-    typeof import("@/contexts/FavoritesContext")
-  >();
+  const actual =
+    await importOriginal<typeof import("@/contexts/FavoritesContext")>();
 
   return {
     ...actual,
@@ -40,7 +38,7 @@ describe("WordCard Component", () => {
     renderWordCard();
 
     expect(
-      screen.getByRole("heading", { name: "صدق", level: 4 })
+      screen.getByRole("heading", { name: "صدق", level: 4 }),
     ).toBeInTheDocument();
     expect(screen.getAllByText("قول الحق")).toHaveLength(2);
   });
@@ -50,7 +48,7 @@ describe("WordCard Component", () => {
     renderWordCard();
 
     await user.click(
-      screen.getByRole("button", { name: "فتح تفاصيل كلمة صدق" })
+      screen.getByRole("button", { name: "فتح تفاصيل كلمة صدق" }),
     );
 
     expect(screen.getByText("الشرح")).toBeInTheDocument();
@@ -63,11 +61,11 @@ describe("WordCard Component", () => {
     const user = userEvent.setup();
 
     await user.click(
-      screen.getByRole("button", { name: "فتح تفاصيل كلمة صدق" })
+      screen.getByRole("button", { name: "فتح تفاصيل كلمة صدق" }),
     );
 
     expect(
-      screen.getByRole("button", { name: "إضافة للمفضلة" })
+      screen.getByRole("button", { name: "إضافة للمفضلة" }),
     ).toBeInTheDocument();
   });
 
@@ -77,11 +75,11 @@ describe("WordCard Component", () => {
     const user = userEvent.setup();
 
     await user.click(
-      screen.getByRole("button", { name: "فتح تفاصيل كلمة صدق" })
+      screen.getByRole("button", { name: "فتح تفاصيل كلمة صدق" }),
     );
 
     expect(
-      screen.getByRole("button", { name: "حذف من المفضلة" })
+      screen.getByRole("button", { name: "حذف من المفضلة" }),
     ).toBeInTheDocument();
   });
 
@@ -91,7 +89,7 @@ describe("WordCard Component", () => {
     renderWordCard();
 
     await user.click(
-      screen.getByRole("button", { name: "فتح تفاصيل كلمة صدق" })
+      screen.getByRole("button", { name: "فتح تفاصيل كلمة صدق" }),
     );
 
     await user.click(screen.getByRole("button", { name: "حذف من المفضلة" }));

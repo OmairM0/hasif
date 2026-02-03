@@ -1,6 +1,4 @@
 "use client";
-
-import { IWord } from "@/interfaces";
 import { ChevronLeft, Star, StarOff } from "lucide-react";
 import {
   Drawer,
@@ -11,9 +9,10 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "./ui/button";
 import { useFavorites } from "@/contexts/FavoritesContext";
+import { Word } from "@/types/models/word";
 
 interface IProps {
-  word: IWord;
+  word: Word;
 }
 
 export default function WordCard({ word }: IProps) {
@@ -37,7 +36,7 @@ export default function WordCard({ word }: IProps) {
       <DrawerContent>
         <div className="space-y-4 p-4">
           <DrawerHeader className="text-right">
-            <DrawerTitle >
+            <DrawerTitle>
               <h3 className="text-3xl font-bold">{word.word}</h3>
             </DrawerTitle>
             <div>

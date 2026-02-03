@@ -1,26 +1,25 @@
-import { IWord } from "@/interfaces";
 import { fetchRandomWord } from "@/services/wordsService";
+import { Word } from "@/types/models/word";
 import { useEffect, useState } from "react";
 
-const exampleWord: IWord = {
+const exampleWord: Word = {
   word: "سجية",
   diacritic: "سَجِيّة",
   meaning: "طبيعة النفس وخلقها الأصيل.",
   explanation: "تقال لما يكون طبعًا ثابتًا في الشخص.",
   example: "الصدقُ سَجيّةٌ كريمة.",
   category: "صفات",
-  rarity: 4,
 };
 
 export function useTodayWord() {
-  const [todayWord, setTodayWord] = useState<IWord | null>(null);
+  const [todayWord, setTodayWord] = useState<Word | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const getToday = () => new Date().toDateString();
-  const save = (word: IWord) => {
+  const save = (word: Word) => {
     localStorage.setItem(
       "todayWord",
-      JSON.stringify({ word, date: getToday() })
+      JSON.stringify({ word, date: getToday() }),
     );
   };
 
