@@ -8,13 +8,14 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const words = await getWords();
+  const res = await getWords({ page: 1, limit: 20 });
+  const words = res.data;
 
   return (
     <>
       <Header title={<h1 className="text-4xl font-bold">الكلمات</h1>} />
       <main>
-        <WordsContainer words={words} />
+        <WordsContainer initialWords={words} />
       </main>
     </>
   );

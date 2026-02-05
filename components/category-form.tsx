@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Spinner from "@/old-components/ui/spinner";
+import { Spinner } from "@/components/ui/spinner";
 import { createCategorySchema } from "@/schema";
 import { apiFetch } from "@/services/api";
 import { ApiError } from "@/services/apiError";

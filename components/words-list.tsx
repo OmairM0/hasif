@@ -2,9 +2,13 @@ import * as motion from "motion/react-client";
 import WordCard from "./word-card";
 import { AnimatePresence } from "motion/react";
 import { Word } from "@/types/models/word";
+import { Ref } from "react";
+import { Spinner } from "./ui/spinner";
 
 interface IProps {
   words: Word[];
+  observerRef?: Ref<HTMLDivElement>;
+  isNewWordsLoading?: boolean;
 }
 
 const containerVariants = {
@@ -31,7 +35,7 @@ const itemVariants = {
   },
 };
 
-const WordsList = ({ words }: IProps) => {
+const WordsList = ({ words, observerRef, isNewWordsLoading }: IProps) => {
   return (
     <>
       <motion.section
@@ -45,7 +49,7 @@ const WordsList = ({ words }: IProps) => {
           {words.map((word) => (
             <motion.div
               layout
-              key={word.word}
+              key={word.id}
               variants={itemVariants}
               className="*:w-full"
               initial="hidden"
@@ -56,6 +60,14 @@ const WordsList = ({ words }: IProps) => {
             </motion.div>
           ))}
         </AnimatePresence>
+
+        {isNewWordsLoading && (
+          <div className="flex flex-col items-center mb-4">
+            <Spinner className="size-8" />
+            <p className="mt-2 text-sm">جاري التحميل...</p>
+          </div>
+        )}
+        {<div ref={observerRef} className="min-h-2 w-full"></div>}
       </motion.section>
     </>
   );

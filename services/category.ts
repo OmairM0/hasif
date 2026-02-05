@@ -3,9 +3,12 @@ import { Category } from "@/types/models/category";
 import { apiFetch } from "./api";
 
 export async function getCategories(): Promise<Category[]> {
-  const res = await apiFetch<ApiResponse<Category[]>>("/categories", {
-    method: "GET",
-  });
+  const res = await apiFetch<ApiResponse<Category[]>>(
+    "/categories?page=1&limit=30",
+    {
+      method: "GET",
+    },
+  );
 
   return res.data;
 }

@@ -36,7 +36,7 @@ export default function WordCard({ word }: IProps) {
       <DrawerContent>
         <div className="space-y-4 p-4">
           <DrawerHeader className="text-right">
-            <DrawerTitle>
+            <DrawerTitle asChild>
               <h3 className="text-3xl font-bold">{word.word}</h3>
             </DrawerTitle>
             <div>
