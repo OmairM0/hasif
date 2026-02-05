@@ -3,6 +3,7 @@ import { Word } from "@/types/models/word";
 import { useEffect, useState } from "react";
 
 const exampleWord: Word = {
+  id: "123testid",
   word: "سجية",
   diacritic: "سَجِيّة",
   meaning: "طبيعة النفس وخلقها الأصيل.",
