@@ -1,6 +1,8 @@
 import { Word } from "@/types/models/word";
 import { apiFetch } from "./api";
 import { ApiResponse } from "@/types/common";
+import z from "zod";
+import { createWordSchema } from "@/schema";
 
 export async function getWords({
   page,
@@ -19,12 +21,30 @@ export async function getWords({
   return res;
 }
 
+type UpdateWordPayload = z.infer<typeof createWordSchema>;
+
+export async function updateWord(
+  id: string,
+  payload: UpdateWordPayload,
+): Promise<Word> {
+  const res = await apiFetch<ApiResponse<Word>>(`/words/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(payload),
+  });
+
+  return res.data;
+}
+
+export async function deleteWord(id: string): Promise<{ message: string }> {
+  const res = await apiFetch<{ message: string }>(`/words/${id}`, {
+    method: "DELETE",
+  });
+
+  return res;
+}
+
 export async function fetchRandomWord(): Promise<Word> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/words/random`);
+  const res = await apiFetch<ApiResponse<Word>>(`/words/random`);
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch random word");
-  }
-
-  return (await res.json()).data;
+  return res.data;
 }

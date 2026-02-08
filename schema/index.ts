@@ -25,3 +25,9 @@ export const createWordSchema = z.object({
   example: z.string().min(1, "يجب إدخال المثال"),
   category: z.string().min(1, "يرجى اختيار تصنيف"),
 });
+
+export const changeWordStatusSchema = z.object({
+  status: z.enum(["pending", "approved", "rejected"], {
+    message: "حالة الكلمة غير صالحة",
+  }),
+});

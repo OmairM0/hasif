@@ -10,6 +10,7 @@ const exampleWord: Word = {
   explanation: "تقال لما يكون طبعًا ثابتًا في الشخص.",
   example: "الصدقُ سَجيّةٌ كريمة.",
   category: "صفات",
+  status: "approved",
 };
 
 export function useTodayWord() {
