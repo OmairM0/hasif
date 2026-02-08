@@ -18,6 +18,12 @@ interface IProps {
 export default function WordCard({ word }: IProps) {
   const { word: name, meaning } = word;
   const { addWord, removeWord, isFavorite } = useFavorites();
+  const status =
+    word.status === "approved"
+      ? "مقبولة"
+      : word.status === "pending"
+        ? "قيد المراجعة"
+        : "مرفوضة";
 
   return (
     <Drawer>
@@ -30,7 +36,19 @@ export default function WordCard({ word }: IProps) {
             <h4 className="text-lg font-semibold">{name}</h4>
             <p className="text-sm">{meaning}</p>
           </div>
-          <ChevronLeft />
+          <div className="flex items-center gap-2">
+            {status === "قيد المراجعة" && (
+              <span className="bg-yellow-400 text-sm font-medium text-white px-2 py-1 rounded-full">
+                {status}
+              </span>
+            )}
+            {status === "مرفوضة" && (
+              <span className="bg-red-600 text-sm font-medium text-white px-2 py-1 rounded-full">
+                {status}
+              </span>
+            )}
+            <ChevronLeft />
+          </div>
         </button>
       </DrawerTrigger>
       <DrawerContent>
@@ -56,26 +74,28 @@ export default function WordCard({ word }: IProps) {
             <p className="text-base">{word.example}</p>
           </div>
 
-          <div className="mx-auto mt-8 w-fit">
-            {isFavorite(word.word) ? (
-              <Button
-                variant="secondary"
-                className="mx-auto rounded-3xl"
-                onClick={() => removeWord(word.word)}
-              >
-                <StarOff size={20} />
-                حذف من المفضلة
-              </Button>
-            ) : (
-              <Button
-                className="mx-auto rounded-3xl"
-                onClick={() => addWord(word)}
-              >
-                <Star size={20} />
-                إضافة للمفضلة
-              </Button>
-            )}
-          </div>
+          {status == "مقبولة" && (
+            <div className="mx-auto mt-8 w-fit">
+              {isFavorite(word.word) ? (
+                <Button
+                  variant="secondary"
+                  className="mx-auto rounded-3xl"
+                  onClick={() => removeWord(word.word)}
+                >
+                  <StarOff size={20} />
+                  حذف من المفضلة
+                </Button>
+              ) : (
+                <Button
+                  className="mx-auto rounded-3xl"
+                  onClick={() => addWord(word)}
+                >
+                  <Star size={20} />
+                  إضافة للمفضلة
+                </Button>
+              )}
+            </div>
+          )}
         </div>
       </DrawerContent>
     </Drawer>

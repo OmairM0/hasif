@@ -36,8 +36,8 @@ export default function LoginForm() {
       );
 
       setToken(response.data.token);
-      router.push("/dashboard");
       toast.success("تم تسجيل الدخول بنجاح");
+      router.push("/dashboard");
     } catch (err) {
       if (err instanceof ApiError) {
         if (err.status === 401) {

@@ -6,4 +6,7 @@ export interface Word {
   explanation: string;
   example: string;
   category: string;
+  status: "approved" | "pending" | "rejected";
+  createdAt: string;
+  updatedAt: string;
 }

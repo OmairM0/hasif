@@ -9,7 +9,7 @@ import { DirectionProvider } from "@/components/ui/direction";
 const ibmPlexSans = IBM_Plex_Sans_Arabic({
   variable: "--font-ibm-plex-sans",
   subsets: ["arabic", "latin"],
-  weight: "400",
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {

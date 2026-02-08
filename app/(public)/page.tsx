@@ -2,18 +2,26 @@
 import Header from "@/components/header";
 import Logo from "@/components/logo";
 import TodayWord from "@/components/today-word";
+import { getToken } from "@/utils/session";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const isAuthenticated = await getToken();
   return (
     <>
       <Header
         title={<Logo />}
         icon={
           // <Settings size={20} aria-hidden="true" className="cursor-pointer" />
-          <Link href="/login" aria-label="تسجيل الدخول">
-            تسجيل الدخول
-          </Link>
+          !isAuthenticated ? (
+            <Link href="/login" aria-label="تسجيل الدخول">
+              تسجيل الدخول
+            </Link>
+          ) : (
+            <Link href="/dashboard" aria-label="لوحة التحكم">
+              لوحة التحكم
+            </Link>
+          )
         }
       />
       <main>
