@@ -34,30 +34,39 @@ import { MoreHorizontalIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import CategoryForm from "./category-form";
+import DataTablePagination from "./data-table-pagination";
 
 export default function CategoriesList() {
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [open, setOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
     null,
   );
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [editOpen, setEditOpen] = useState(false);
+  const [page, setPage] = useState(1);
+  const limit = 5;
+  const [totalPages, setTotalPages] = useState(1);
+  const [pageLoading, setPageLoading] = useState(false);
 
-  const fetchCategories = async () => {
+  const fetchCategories = async (pageNumber: number) => {
     try {
-      const data = await getCategories();
-      setCategories(data);
+      setPageLoading(true);
+      const res = await getCategories({ page: pageNumber, limit });
+      setCategories(res.data);
+      setTotalPages(res.pagination?.totalPages || 1);
+      setPage(pageNumber);
     } catch {
       toast.error("حدث خطأ أثناء جلب التصنيفات");
     } finally {
       setLoading(false);
+      setPageLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchCategories();
+    fetchCategories(1);
   }, []);
 
   const handleDelete = async (id: string) => {
@@ -66,6 +75,9 @@ export default function CategoriesList() {
       await deleteCategory(id);
       setCategories((prev) => prev.filter((c) => c.id !== id));
       toast.success("تم حذف التصنيف");
+
+      setDeleteOpen(false);
+      setSelectedCategory(null);
     } catch {
       toast.error("فشل حذف التصنيف");
     }
@@ -126,7 +138,7 @@ export default function CategoriesList() {
                       variant="destructive"
                       onClick={() => {
                         setSelectedCategory(category);
-                        setOpen(true);
+                        setDeleteOpen(true);
                       }}
                     >
                       حذف
@@ -138,6 +150,12 @@ export default function CategoriesList() {
           ))}
         </TableBody>
       </Table>
+      <DataTablePagination
+        page={page}
+        totalPages={totalPages}
+        loading={pageLoading}
+        onPageChange={fetchCategories}
+      />
 
       <AlertDialog open={editOpen} onOpenChange={setEditOpen}>
         <AlertDialogContent size="sm">
@@ -169,7 +187,7 @@ export default function CategoriesList() {
         </AlertDialogContent>
       </AlertDialog>
 
-      <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
         <AlertDialogContent size="sm">
           <AlertDialogHeader>
             <AlertDialogMedia className="bg-destructive/10 text-destructive dark:bg-destructive/20 dark:text-destructive">

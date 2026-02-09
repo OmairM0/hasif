@@ -40,6 +40,7 @@ import { Word } from "@/types/models/word";
 import WordStatus from "./word-status";
 import WordForm from "./word-form";
 import { ApiError } from "@/services/apiError";
+import DataTablePagination from "./data-table-pagination";
 
 export default function WordsDashboardList() {
   const [loading, setLoading] = useState(true);
@@ -50,19 +51,33 @@ export default function WordsDashboardList() {
   const [editingWord, setEditingWord] = useState<Word | null>(null);
   const [editOpen, setEditOpen] = useState(false);
 
-  const fetchWords = async () => {
+  const [page, setPage] = useState(1);
+  const limit = 20;
+  const [totalPages, setTotalPages] = useState(1);
+  const [pageLoading, setPageLoading] = useState(false);
+
+  const fetchWords = async (pageNumber: number) => {
     try {
-      const data = await getWords({ page: 1, limit: 20 });
-      setWords(data.data);
+      if (pageNumber == 1) {
+        setLoading(true);
+      } else {
+        setPageLoading(true);
+      }
+
+      const res = await getWords({ page: pageNumber, limit });
+      setWords(res.data);
+      setTotalPages(res.pagination?.totalPages || 1);
+      setPage(pageNumber);
     } catch {
       toast.error("حدث خطأ أثناء جلب الكلمات");
     } finally {
       setLoading(false);
+      setPageLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchWords();
+    fetchWords(1);
   }, []);
 
   const handleDelete = async (id: string) => {
@@ -71,6 +86,9 @@ export default function WordsDashboardList() {
       await deleteWord(id);
       setWords((prev) => prev.filter((c) => c.id !== id));
       toast.success("تم حذف الكلمة");
+
+      setDeleteOpen(false);
+      setSelectedWord(null);
     } catch {
       toast.error("فشل حذف الكلمة");
     }
@@ -186,7 +204,11 @@ export default function WordsDashboardList() {
                     disabled={processingIds.has(word.id)}
                     onClick={() => handleChangeStatus(word.id, action.status)}
                   >
-                    {processingIds.has(word.id) ? <Spinner /> : action.label}
+                    {processingIds.has(word.id) ? (
+                      <Spinner className="size-4" />
+                    ) : (
+                      action.label
+                    )}
                   </Button>
                 ))}
 
@@ -223,6 +245,12 @@ export default function WordsDashboardList() {
           ))}
         </TableBody>
       </Table>
+      <DataTablePagination
+        page={page}
+        totalPages={totalPages}
+        loading={pageLoading}
+        onPageChange={fetchWords}
+      />
 
       <AlertDialog open={editOpen} onOpenChange={setEditOpen}>
         <AlertDialogContent size="sm">

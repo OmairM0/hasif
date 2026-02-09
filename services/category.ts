@@ -2,15 +2,21 @@ import { ApiResponse } from "@/types/common";
 import { Category } from "@/types/models/category";
 import { apiFetch } from "./api";
 
-export async function getCategories(): Promise<Category[]> {
+export async function getCategories({
+  page,
+  limit,
+}: {
+  page: number;
+  limit: number;
+}): Promise<ApiResponse<Category[]>> {
   const res = await apiFetch<ApiResponse<Category[]>>(
-    "/categories?page=1&limit=30",
+    `/categories?page=${page}&limit=${limit}`,
     {
       method: "GET",
     },
   );
 
-  return res.data;
+  return res;
 }
 
 export async function getCategory(id: string): Promise<Category> {

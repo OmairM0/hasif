@@ -28,8 +28,8 @@ export default function SelectCategory({
 
   const fetchCategories = async () => {
     try {
-      const data = await getCategories();
-      setCategories(data);
+      const res = await getCategories({ page: 1, limit: 40 });
+      setCategories(res.data);
     } catch {
       toast.error("حدث خطأ أثناء جلب التصنيفات");
     } finally {
