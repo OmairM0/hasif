@@ -31,15 +31,21 @@ import { Spinner } from "@/components/ui/spinner";
 import { MoreHorizontalIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { deleteWord, getWords } from "@/services/wordsService";
+import {
+  changeWordStatus,
+  deleteWord,
+  getWords,
+} from "@/services/wordsService";
 import { Word } from "@/types/models/word";
 import WordStatus from "./word-status";
 import WordForm from "./word-form";
+import { ApiError } from "@/services/apiError";
 
 export default function WordsDashboardList() {
   const [loading, setLoading] = useState(true);
+  const [processingIds, setProcessingIds] = useState<Set<string>>(new Set());
   const [words, setWords] = useState<Word[]>([]);
-  const [open, setOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
   const [selectedWord, setSelectedWord] = useState<Word | null>(null);
   const [editingWord, setEditingWord] = useState<Word | null>(null);
   const [editOpen, setEditOpen] = useState(false);
@@ -69,6 +75,72 @@ export default function WordsDashboardList() {
       toast.error("فشل حذف الكلمة");
     }
   };
+
+  const handleChangeStatus = async (id: string, status: string) => {
+    if (processingIds.has(id)) return;
+
+    setProcessingIds((prev) => new Set(prev).add(id));
+    try {
+      const updated = (await changeWordStatus(id, status)).data;
+      setWords((prev) => prev.map((w) => (w.id === updated.id ? updated : w)));
+      toast.success("تم تحديث حالة الكلمة بنجاح");
+    } catch (err) {
+      if (err instanceof ApiError) {
+        if (err.status === 404) {
+          toast.error("الكلمة غير موجودة");
+        } else {
+          toast.error(err.message);
+        }
+      } else {
+        toast.error("حدث خطأ غير متوقع");
+      }
+    } finally {
+      setProcessingIds((prev) => {
+        const next = new Set(prev);
+        next.delete(id);
+        return next;
+      });
+    }
+  };
+
+  const statusActions = {
+    approved: [
+      {
+        label: "رفض",
+        status: "rejected",
+        className: "bg-red-100 text-red-700 hover:bg-red-200",
+      },
+      {
+        label: "تعليق",
+        status: "pending",
+        className: "bg-orange-100 text-orange-700 hover:bg-orange-200",
+      },
+    ],
+    pending: [
+      {
+        label: "رفض",
+        status: "rejected",
+        className: "bg-red-100 text-red-700 hover:bg-red-200",
+      },
+      {
+        label: "قبول",
+        status: "approved",
+        className: "bg-emerald-100 text-emerald-700 hover:bg-emerald-200",
+      },
+    ],
+    rejected: [
+      {
+        label: "تعليق",
+        status: "pending",
+        className: "bg-orange-100 text-orange-700 hover:bg-orange-200",
+      },
+      {
+        label: "قبول",
+        status: "approved",
+        className: "bg-emerald-100 text-emerald-700 hover:bg-emerald-200",
+      },
+    ],
+  } as const;
 
   if (loading) {
     return (
@@ -105,7 +177,19 @@ export default function WordsDashboardList() {
               <TableCell className="text-center">
                 <WordStatus status={word.status} />
               </TableCell>
-              <TableCell className="text-left">
+              <TableCell className="text-left flex gap-2 justify-end">
+                {statusActions[word.status]?.map((action) => (
+                  <Button
+                    key={action.status}
+                    size="sm"
+                    className={action.className}
+                    disabled={processingIds.has(word.id)}
+                    onClick={() => handleChangeStatus(word.id, action.status)}
+                  >
+                    {processingIds.has(word.id) ? <Spinner /> : action.label}
+                  </Button>
+                ))}
+
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="icon" className="size-8">
@@ -127,7 +211,7 @@ export default function WordsDashboardList() {
                       variant="destructive"
                       onClick={() => {
                         setSelectedWord(word);
-                        setOpen(true);
+                        setDeleteOpen(true);
                       }}
                     >
                       حذف
@@ -170,7 +254,7 @@ export default function WordsDashboardList() {
         </AlertDialogContent>
       </AlertDialog>
 
-      <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
         <AlertDialogContent size="sm">
           <AlertDialogHeader>
             <AlertDialogMedia className="bg-destructive/10 text-destructive dark:bg-destructive/20 dark:text-destructive">

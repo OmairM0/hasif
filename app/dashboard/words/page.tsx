@@ -1,4 +1,3 @@
-import { Input } from "@/components/ui/input";
 import WordsDashboardList from "@/components/words-dashboard-list";
 import { Metadata } from "next";
 
@@ -9,7 +8,7 @@ export const metadata: Metadata = {
 export default async function Page() {
   return (
     <div className="flex flex-col">
-      <h2>اخر الكلمات</h2>
+      <h2 className="text-xl font-bold mb-4">الكلمات</h2>
       <WordsDashboardList />
     </div>
   );

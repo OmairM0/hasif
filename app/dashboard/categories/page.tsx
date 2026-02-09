@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="flex flex-col">
+      <h2 className="text-xl font-bold mb-4">التصنيفات</h2>
       <CategoriesList />
     </div>
   );

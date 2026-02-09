@@ -35,6 +35,18 @@ export async function updateWord(
   return res.data;
 }
 
+export async function changeWordStatus(
+  id: string,
+  status: string,
+): Promise<ApiResponse<Word>> {
+  const res = await apiFetch<ApiResponse<Word>>(`/words/${id}/status`, {
+    method: "PATCH",
+    body: JSON.stringify({ status }),
+  });
+
+  return res;
+}
+
 export async function deleteWord(id: string): Promise<{ message: string }> {
   const res = await apiFetch<{ message: string }>(`/words/${id}`, {
     method: "DELETE",
