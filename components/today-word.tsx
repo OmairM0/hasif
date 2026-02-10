@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { Shuffle, Star, StarOff } from "lucide-react";
 import MainCard from "./main-card";
 import { Spinner } from "./ui/spinner";
-import { useFavorites } from "@/contexts/FavoritesContext";
+import { useFavorites } from "@/contexts/favorites-context";
 import { useTodayWord } from "@/hooks/useTodayWord";
 import { motion } from "motion/react";
 

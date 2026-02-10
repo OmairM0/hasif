@@ -1,6 +1,6 @@
 "use client";
 
-import { useFavorites } from "@/contexts/FavoritesContext";
+import { useFavorites } from "@/contexts/favorites-context";
 import { Star } from "lucide-react";
 import WordCard from "./word-card";
 import { Spinner } from "./ui/spinner";

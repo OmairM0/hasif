@@ -17,7 +17,7 @@ const renderWordCard = () => renderWithProviders(<WordCard word={mockWord} />);
 
 vi.mock("@/contexts/FavoritesContext", async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import("@/contexts/FavoritesContext")>();
+    await importOriginal<typeof import("@/contexts/favorites-context")>();
 
   return {
     ...actual,

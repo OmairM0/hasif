@@ -1,6 +1,6 @@
 "use client";
 
-import { FavoritesProvider } from "@/contexts/FavoritesContext";
+import { FavoritesProvider } from "@/contexts/favorites-context";
 
 export function FavoritesClientProvider({
   children,

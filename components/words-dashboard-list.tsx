@@ -41,8 +41,10 @@ import WordStatus from "./word-status";
 import WordForm from "./word-form";
 import { ApiError } from "@/services/apiError";
 import DataTablePagination from "./data-table-pagination";
+import { useAuth } from "@/hooks/use-auth";
 
 export default function WordsDashboardList() {
+  const { isAdmin } = useAuth();
   const [loading, setLoading] = useState(true);
   const [processingIds, setProcessingIds] = useState<Set<string>>(new Set());
   const [words, setWords] = useState<Word[]>([]);
@@ -196,21 +198,22 @@ export default function WordsDashboardList() {
                 <WordStatus status={word.status} />
               </TableCell>
               <TableCell className="text-left flex gap-2 justify-end">
-                {statusActions[word.status]?.map((action) => (
-                  <Button
-                    key={action.status}
-                    size="sm"
-                    className={action.className}
-                    disabled={processingIds.has(word.id)}
-                    onClick={() => handleChangeStatus(word.id, action.status)}
-                  >
-                    {processingIds.has(word.id) ? (
-                      <Spinner className="size-4" />
-                    ) : (
-                      action.label
-                    )}
-                  </Button>
-                ))}
+                {isAdmin &&
+                  statusActions[word.status]?.map((action) => (
+                    <Button
+                      key={action.status}
+                      size="sm"
+                      className={action.className}
+                      disabled={processingIds.has(word.id)}
+                      onClick={() => handleChangeStatus(word.id, action.status)}
+                    >
+                      {processingIds.has(word.id) ? (
+                        <Spinner className="size-4" />
+                      ) : (
+                        action.label
+                      )}
+                    </Button>
+                  ))}
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -228,16 +231,20 @@ export default function WordsDashboardList() {
                     >
                       تعديل
                     </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      variant="destructive"
-                      onClick={() => {
-                        setSelectedWord(word);
-                        setDeleteOpen(true);
-                      }}
-                    >
-                      حذف
-                    </DropdownMenuItem>
+                    {isAdmin && (
+                      <>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem
+                          variant="destructive"
+                          onClick={() => {
+                            setSelectedWord(word);
+                            setDeleteOpen(true);
+                          }}
+                        >
+                          حذف
+                        </DropdownMenuItem>
+                      </>
+                    )}
                   </DropdownMenuContent>
                 </DropdownMenu>
               </TableCell>

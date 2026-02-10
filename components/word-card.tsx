@@ -8,7 +8,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "./ui/button";
-import { useFavorites } from "@/contexts/FavoritesContext";
+import { useFavorites } from "@/contexts/favorites-context";
 import { Word } from "@/types/models/word";
 
 interface IProps {

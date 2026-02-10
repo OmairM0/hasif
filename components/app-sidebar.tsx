@@ -20,12 +20,15 @@ import { ChevronLeft, GalleryVerticalEnd, List } from "lucide-react";
 import { isSectionActive, isSubItemActive } from "@/utils/navigation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/hooks/use-auth";
+import { Spinner } from "./ui/spinner";
 
 export const menuItems = [
   {
     title: "الكلمات",
     icon: List,
     basePath: "/dashboard/words",
+    adminOnly: false,
     items: [
       { title: "كل الكلمات", href: "/dashboard/words" },
       { title: "إضافة كلمة", href: "/dashboard/words/create" },
@@ -35,6 +38,7 @@ export const menuItems = [
     title: "التصنيفات",
     icon: GalleryVerticalEnd,
     basePath: "/dashboard/categories",
+    adminOnly: true,
     items: [
       { title: "كل التصنيفات", href: "/dashboard/categories" },
       { title: "إضافة تصنيف", href: "/dashboard/categories/create" },
@@ -44,6 +48,7 @@ export const menuItems = [
 
 export default function AppSidebar() {
   const pathname = usePathname();
+  const { isAdmin } = useAuth();
 
   return (
     <Sidebar dir="rtl" collapsible="icon">
@@ -66,6 +71,7 @@ export default function AppSidebar() {
         <SidebarGroup>
           <SidebarMenu>
             {menuItems.map((item) => {
+              if (item.adminOnly && !isAdmin) return null;
               const isSecActive = isSectionActive(pathname, item.basePath);
               return (
                 <Collapsible
