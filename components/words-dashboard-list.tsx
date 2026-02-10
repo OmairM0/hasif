@@ -66,7 +66,7 @@ export default function WordsDashboardList() {
         setPageLoading(true);
       }
 
-      const res = await getWords({ page: pageNumber, limit });
+      const res = await getWords({ page: pageNumber, limit, scope: "me" });
       setWords(res.data);
       setTotalPages(res.pagination?.totalPages || 1);
       setPage(pageNumber);

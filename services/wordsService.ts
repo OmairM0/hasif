@@ -7,12 +7,14 @@ import { createWordSchema } from "@/schema";
 export async function getWords({
   page,
   limit,
+  scope = "all",
 }: {
   page: number;
   limit: number;
+  scope?: string;
 }): Promise<ApiResponse<Word[]>> {
   const res = await apiFetch<ApiResponse<Word[]>>(
-    `/words?page=${page}&limit=${limit}`,
+    `/words?page=${page}&limit=${limit}&scope=${scope}`,
     {
       method: "GET",
     },

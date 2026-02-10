@@ -21,7 +21,6 @@ import { isSectionActive, isSubItemActive } from "@/utils/navigation";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/hooks/use-auth";
-import { Spinner } from "./ui/spinner";
 
 export const menuItems = [
   {
