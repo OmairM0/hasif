@@ -1,10 +1,10 @@
 import Header from "@/components/header";
-import LoginForm from "@/components/login-form";
+import SignupForm from "@/components/signup-form";
 import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "تسجيل الدخول",
+  title: "إنشاء حساب",
 };
 
 export default async function Page() {
@@ -12,16 +12,16 @@ export default async function Page() {
     <div className="max-w-6xl mx-auto min-h-dvh flex flex-col p-4">
       <Header title={<h1 className="text-4xl font-bold">حصيف</h1>} />
       <main className="mt-4">
-        <h1 className="text-center text-3xl font-bold">تسجيل الدخول</h1>
+        <h1 className="text-center text-3xl font-bold">إنشاء حساب</h1>
         <h2 className="text-center text-sm mt-4 font-bold">
-          اهلاً بك👋، قم بتسجيل الدخول
+          اهلاً بك👋، قم بإنشاء حسابك
         </h2>
-        <LoginForm />
+        <SignupForm />
         <Link
-          href="/signup"
+          href="/login"
           className="block text-center mt-4 text-blue-500 hover:underline"
         >
-          ليس لديك حساب؟ سجل الآن
+          لديك حساب بالفعل؟ سجل الدخول
         </Link>
         <Link
           href="/"
